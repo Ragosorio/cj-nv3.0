@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pregunta importante :)</title>
+    <style>
+      :root {
+         --bg-color-document: #fdd0d0; /* Fondo del documento - Rosa claro para un tono romántico */
+  --bg-color-container: #fdeff0; /* Fondo del contenedor - Rosa pálido para un contraste suave */
+  --border-color: #f9a1b5; /* Bordes - Rosa intenso para mantener la temática romántica */
+  --bg-color-btn-no: #f28a8c; /* Botón "Sí" - Rojo suave, cálido y atractivo */
+  --bg-color-btn-no-hover: #ff6f6f; /* Botón "Sí" al pasar el cursor - Rojo más brillante para resaltar la interacción */
+  --bg-color-btn-si: #a1e2d8; /* Botón "No" - Verde suave para un contraste fresco y suave */
+  --bg-color-btn-si-hover: #7cd0c7; /* Botón "No" al pasar el cursor - Verde un poco más claro para el efecto hover */
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background: var(--bg-color-document);
+        font-family: "Segoe UI", "Open Sans", "Helvetica Neue", sans-serif;
+        display: grid;
+        place-content: center;
+        height: 100dvh;
+        width: 100%;
+      }
+      .box {
+        width: 80vw;
+        background: var(--bg-color-container);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        h1 {
+          font-size: 18px;
+          font-weight: 500;
+          margin-top: 28px;
+          margin-bottom: 8px;
+          text-align: center;
+        }
+        .btn-container {
+          margin: 10px 0;
+          position: relative;
+          height: 50px;
+          width: 100%;
+          .btn-si {
+            background: var(--bg-color-btn-si);
+            color: #fff;
+            width: 80px;
+            height: 40px;
+            position: absolute;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-right: 5px;
+            cursor: pointer;
+            left: 24%;
+            transition: background 0.2s ease;
+            &:hover {
+              background: var(--bg-color-btn-si-hover);
+            }
+          }
+          .btn-no {
+            background: var(--bg-color-btn-no);
+            color: #fff;
+            width: 80px;
+            height: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-left: 5px;
+            position: absolute;
+            cursor: pointer;
+            right: 24%;
+
+            transition: transform 0.2s ease;
+            &:hover {
+              background: var(--bg-color-btn-no-hover);
+            }
+          }
+        }
+        img {
+          width: 90%;
+          margin-bottom: 20px;
+          margin-top: 8px;
+        }
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h1 id="title">¿Quieres ser mi novia? 🥺</h1>
+      <div class="btn-container" id="containerBtns">
+        <button class="btn-si" id="btnSi">Si</button>
+        <button class="btn-no" id="btnNo">No</button>
+      </div>
+      <img src="" alt="gato" id="img" />
+    </div>
+
+    <script>
+      const mensajeFinal = "Sabía que aceptarías ❤️";
+
+      const imagenPrincipio =
+        "./cj.webp";
+      const imageneFinal =
+        "https://stickerly.pstatic.net/sticker_pack/RoQKd7eh2a6EUxtCfRXefw/PTDFFC/16/1673169483582.png";
+
+      //Si quieres entender lo de aqui abajo ⬇️ escribe por dm @ragosorio
+
+      const $ = (e) => document.getElementById(e);
+
+      const btnSi = $("btnSi");
+      const btnNo = $("btnNo");
+      const title = $("title");
+      const img = $("img");
+      const btnContainer = $("containerBtns");
+
+      img.src = imagenPrincipio;
+
+      btnSi.addEventListener("click", () => {
+        title.textContent = mensajeFinal;
+        img.src = imageneFinal;
+        btnContainer.classList.add("hidden");
+      });
+
+      const getRandomOffset = (max) => Math.floor(Math.random() * max);
+
+      const moveButton = (btn) => {
+        const maxOffset = 100;
+        const rect = btn.getBoundingClientRect();
+
+        const maxX = window.innerWidth - rect.width;
+        const maxY = window.innerHeight - rect.height;
+
+        const newX = Math.min(getRandomOffset(maxOffset), maxX - rect.left);
+        const newY = Math.min(getRandomOffset(maxOffset), maxY - rect.top);
+
+        btn.style.transform = `translate(${newX}px, ${newY}px)`;
+      };
+
+      btnNo.addEventListener("mouseover", () => moveButton(btnNo));
+
+      btnNo.addEventListener("click", () => moveButton(btnNo));
+    </script>
+  </body>
+</html>
